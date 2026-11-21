@@ -11,7 +11,7 @@ main.home { --gx: "Geist", "Inter Tight", system-ui, sans-serif; --gm: "Geist Mo
 .x-bar { position: absolute; z-index: 3; top: 14px; left: 14px; right: 14px; height: 46px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px 0 16px;
   border-radius: 10px; background: rgba(22,22,26,.72); border: 1px solid rgba(255,255,255,.06); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .x-brand { display: flex; align-items: center; gap: 9px; }
-.x-brand svg { width: 15px; height: 15px; }
+.x-brand svg, .x-brand img { width: 19px; height: 19px; }
 .x-brand b { font: 500 17px var(--gm); letter-spacing: -.02em; }
 .x-brand span { font: 400 11px var(--gm); color: #77777f; letter-spacing: .06em; margin-left: 14px; }
 .x-right { display: flex; align-items: center; gap: 18px; }

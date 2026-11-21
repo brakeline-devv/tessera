@@ -20,7 +20,7 @@ button { font: inherit; color: inherit; }
 /* the blur sits on a pseudo-element: backdrop-filter on .top itself would trap the fixed mobile nav inside it */
 .top::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: rgba(22,22,26,.78); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .brand { display: flex; align-items: center; gap: 9px; }
-.brand svg, .brand img { width: 15px; height: 15px; }
+.brand svg, .brand img { width: 19px; height: 19px; }
 .brand span { font: 500 17px var(--mono); letter-spacing: -.02em; text-transform: uppercase; }
 .brand span::after { content: "."; }
 .nav { display: flex; gap: 2px; margin-left: 18px; }
