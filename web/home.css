@@ -1,4 +1,4 @@
-/* Molten landing, after the reference: near-black, a thin translucent top bar, grotesk headline, mono micro-labels, pastel light. */
+/* Tessera landing, after the reference: near-black, a thin translucent top bar, grotesk headline, mono micro-labels, pastel light. */
 body.home-mode { background: #0b0b0e; }
 body.home-mode > .top { display: none; }            /* the landing has its own bar, like the reference */
 main.home { --gx: "Geist", "Inter Tight", system-ui, sans-serif; --gm: "Geist Mono", "JetBrains Mono", monospace; font-family: var(--gx); color: #f3f3f5; background: #0b0b0e; max-width: none; padding: 0; }

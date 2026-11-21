@@ -2,7 +2,7 @@
 const { privateKeyToAccount } = require("viem/accounts");
 const BASE = "http://127.0.0.1:6700", acct = privateKeyToAccount("0x" + "33".repeat(32));
 (async () => {
-  const H = { "content-type": "application/json", "x-molten": "1" };
+  const H = { "content-type": "application/json", "x-tessera": "1" };
   const n = await (await fetch(BASE + "/api/auth/nonce", { method: "POST", headers: H, body: JSON.stringify({ address: acct.address }) })).json();
   const v = await fetch(BASE + "/api/auth/verify", { method: "POST", headers: H, body: JSON.stringify({ address: acct.address, nonce: n.nonce, signature: await acct.signMessage({ message: n.message }) }) });
   const cookie = v.headers.get("set-cookie").split(";")[0], C = { ...H, cookie };

@@ -1,4 +1,4 @@
-# Molten
+# Tessera
 
 Make anything, in one prompt. Claude makes a website, three logo concepts, a looping animation or a set of X posts.
 Users pay per use with credits bought in ETH on Robinhood Chain; agents use the same credits over MCP or REST, within caps.
@@ -24,10 +24,10 @@ Users pay per use with credits bought in ETH on Robinhood Chain; agents use the 
 
 ## Agents
 
-Keys (`molten_…`, shown once, stored as SHA-256) carry a mode allow-list, a per-job cap, a daily cap and an expiry.
+Keys (`tessera_…`, shown once, stored as SHA-256) carry a mode allow-list, a per-job cap, a daily cap and an expiry.
 Tools: get_balance, list_modes, quote, create, get_job, list_outputs, get_output.
 
-- MCP (streamable HTTP, stateless): `POST /mcp` with `Authorization: Bearer molten_…`
+- MCP (streamable HTTP, stateless): `POST /mcp` with `Authorization: Bearer tessera_…`
 - REST: `POST /api/agent/<tool>` with the same header and a JSON body
 
 ## Run
@@ -53,7 +53,7 @@ then `node test/e2e-ui.cjs <outdir>`. Never run the faucet on a public server; t
 
 ```
 npm run costs [days]      # per day: jobs, tokens, Claude cost, charged, margin, deposits
-npm run backup            # consistent copy to data/backups/molten-YYYY-MM-DD.db (VACUUM INTO), keeps 14
+npm run backup            # consistent copy to data/backups/tessera-YYYY-MM-DD.db (VACUUM INTO), keeps 14
 ```
 
 On the server a systemd timer runs the backup every night.

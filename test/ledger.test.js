@@ -77,7 +77,7 @@ test("agent key: mode allow-list, per-job cap and revoke", async () => {
   assert.equal(ok.job.via, key.via);
   svc.revokeKey(A, k.id);
   assert.equal(svc.keyAuth(k.secret), null);
-  assert.equal(svc.keyAuth("molten_wrong"), null);
+  assert.equal(svc.keyAuth("tessera_wrong"), null);
 });
 
 test("svg cleanup strips scripts, handlers and external refs", () => {

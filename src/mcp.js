@@ -1,4 +1,4 @@
-// Agent tools, reachable two ways with the same API key (Bearer molten_...):
+// Agent tools, reachable two ways with the same API key (Bearer tessera_...):
 //   MCP over streamable HTTP at POST /mcp      (Claude Desktop, Claude Code, Cursor)
 //   REST at POST /api/agent/<tool> with a JSON body
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";

@@ -162,7 +162,7 @@ export function makeService(db, ledger) {
     createKey(address, { name, modes, perJobCap, dailyCap, days }) {
       const ms = (Array.isArray(modes) && modes.length ? modes : Object.keys(MODES)).filter((m) => MODES[m]);
       const per = Math.max(1, Math.min(500, Number(perJobCap) || 100)), daily = Math.max(per, Math.min(5000, Number(dailyCap) || 300));
-      const secret = "molten_" + randomBytes(24).toString("base64url");
+      const secret = "tessera_" + randomBytes(24).toString("base64url");
       const keyId = id("key_", 8);
       const exp = Number(days) > 0 ? now() + Math.min(365, Number(days)) * DAY : null;
       S.keyIns.run(keyId, address, String(name || "agent").slice(0, 40), sha(secret), secret.slice(0, 11), ms.join(","), per * MC_PER_CREDIT, daily * MC_PER_CREDIT, exp, now());
@@ -171,7 +171,7 @@ export function makeService(db, ledger) {
     keys(address) { return S.keyList.all(address).map((k) => ({ ...k, modes: k.modes.split(","), perJobCap: toCredits(k.per_job_cap_mc), dailyCap: toCredits(k.daily_cap_mc) })); },
     revokeKey(address, keyId) { if (S.keyRevoke.run(now(), String(keyId), address).changes !== 1) throw new UserError("key not found or already revoked", 404); return { revoked: true }; },
     keyAuth(secret) {
-      if (!secret || !String(secret).startsWith("molten_")) return null;
+      if (!secret || !String(secret).startsWith("tessera_")) return null;
       const k = S.keyByHash.get(sha(String(secret)));
       if (!k || k.revoked_at || (k.expires_at && k.expires_at < now())) return null;
       S.keyUsed.run(now(), k.id);

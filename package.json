@@ -1,8 +1,8 @@
 {
-  "name": "molten",
+  "name": "tessera",
   "version": "0.1.0",
   "private": true,
-  "description": "Molten: prompt to website, logo, motion or X content, made by Claude, paid per use with ETH credits on Robinhood Chain. Agents use it over MCP.",
+  "description": "Tessera: prompt to website, logo, motion or X content, made by Claude, paid per use with ETH credits on Robinhood Chain. Agents use it over MCP.",
   "type": "module",
   "engines": {
     "node": ">=22.5"

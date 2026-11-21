@@ -1,4 +1,4 @@
-// Molten front-end: hash router, wallet sign-in, studio, gallery, credits, agent keys, docs. No framework, no bundler.
+// Tessera front-end: hash router, wallet sign-in, studio, gallery, credits, agent keys, docs. No framework, no bundler.
 const $ = (s, el = document) => el.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const fmt = (n, d = 2) => Number(n || 0).toLocaleString("en-US", { maximumFractionDigits: d });
@@ -6,7 +6,7 @@ const ago = (t) => { const s = (Date.now() - t) / 1000; return s < 60 ? "just no
 const short = (a) => a ? a.slice(0, 6) + "…" + a.slice(-4) : "";
 
 async function api(path, body, method) {
-  const r = await fetch(path, { method: method || (body ? "POST" : "GET"), headers: body ? { "content-type": "application/json", "x-molten": "1" } : { "x-molten": "1" }, body: body ? JSON.stringify(body) : undefined, credentials: "same-origin" });
+  const r = await fetch(path, { method: method || (body ? "POST" : "GET"), headers: body ? { "content-type": "application/json", "x-tessera": "1" } : { "x-tessera": "1" }, body: body ? JSON.stringify(body) : undefined, credentials: "same-origin" });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) { const e = new Error(j.error || r.statusText); e.status = r.status; e.code = j.code; throw e; }
   return j;
@@ -57,7 +57,7 @@ async function ensureChain() {
 }
 
 /* ---------------- router ---------------- */
-import { home as homeView, homeCleanup } from "./home.js?v=10";
+import { home as homeView, homeCleanup } from "./home.js?v=11";
 const home = () => homeView(S);
 const VIEWS = { home, studio, gallery, account, agents, docs, terms, privacy };
 function route() {
@@ -234,13 +234,13 @@ async function agents() {
       <div class="field fields3"><div><label>Per job cap</label><input type="number" id="kp" value="100" min="1"></div><div><label>Daily cap</label><input type="number" id="kd" value="300" min="1"></div><div><label>Expires (days)</label><input type="number" id="kx" value="30" min="0"></div></div>
       <button class="btn" id="mk" style="margin-top:16px">Create key</button><div id="sec"></div></section>
     <section class="card box"><h3>Connect it</h3>
-      <p class="fine" style="margin-top:8px">Claude Code</p><pre class="code">claude mcp add --transport http molten ${esc(url)} \\
-  --header "Authorization: Bearer molten_…"</pre>
-      <p class="fine" style="margin-top:14px">Claude Desktop / Cursor (mcp.json)</p><pre class="code">{ "mcpServers": { "molten": {
+      <p class="fine" style="margin-top:8px">Claude Code</p><pre class="code">claude mcp add --transport http tessera ${esc(url)} \\
+  --header "Authorization: Bearer tessera_…"</pre>
+      <p class="fine" style="margin-top:14px">Claude Desktop / Cursor (mcp.json)</p><pre class="code">{ "mcpServers": { "tessera": {
   "url": "${esc(url)}",
-  "headers": { "Authorization": "Bearer molten_…" } } } }</pre>
+  "headers": { "Authorization": "Bearer tessera_…" } } } }</pre>
       <p class="fine" style="margin-top:14px">REST</p><pre class="code">curl -X POST ${esc((S.cfg.publicUrl || location.origin) + "/api/agent/create")} \\
-  -H "Authorization: Bearer molten_…" -H "content-type: application/json" \\
+  -H "Authorization: Bearer tessera_…" -H "content-type: application/json" \\
   -d '{"mode":"logo","prompt":"logo for Ember coffee"}'</pre>
       <p class="fine" style="margin-top:12px">Tools: ${S.cfg.tools.map((t) => `<span class="pill">${t}</span>`).join(" ")}</p></section></div>
     <section class="card box" style="margin-top:18px"><h3>Your keys</h3><div style="margin-top:14px">${keys.length ? `<table class="t"><tr><th>name</th><th>key</th><th>modes</th><th>caps</th><th>last used</th><th></th></tr>${keys.map((k) => `<tr><td><b>${esc(k.name)}</b></td><td>${esc(k.prefix)}…</td><td>${k.modes.join(", ")}</td><td>${fmt(k.perJobCap)} / job · ${fmt(k.dailyCap)} / day</td><td>${k.revoked_at ? `<span class="pill bad">revoked</span>` : k.expires_at && k.expires_at < Date.now() ? `<span class="pill">expired</span>` : k.last_used ? ago(k.last_used) : "never"}</td><td>${k.revoked_at ? "" : `<button class="btn ghost xs" data-rv="${k.id}">Revoke</button>`}</td></tr>`).join("")}</table>` : `<p class="fine">No keys yet.</p>`}</div></section>`;

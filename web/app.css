@@ -1,8 +1,8 @@
-/* Molten app pages, in the landing's system: near-black, hairline borders, Geist + Geist Mono, pastel light (peach, periwinkle, sand). */
+/* Tessera app pages, in the landing's system: near-black, hairline borders, Geist + Geist Mono, pastel light (peach, periwinkle, sand). */
 :root { --bg: #0b0b0e; --panel: #121216; --panel2: #18181d; --line: rgba(255,255,255,.07); --line2: rgba(255,255,255,.14);
   --ink: #f3f3f5; --sub: #a9a9b3; --mute: #77777f; --peach: #f2a48c; --peri: #8199f2; --sand: #e9d19c;
   --hot: var(--peach); --gold: var(--sand); --ember2: var(--peach);
-  --molten: linear-gradient(100deg, #f2a48c, #c39bf0 55%, #8199f2);
+  --tessera: linear-gradient(100deg, #f2a48c, #c39bf0 55%, #8199f2);
   --ok: #9fe3bf; --bad: #ff8f84;
   --sans: "Geist", "Inter Tight", system-ui, sans-serif; --mono: "Geist Mono", "JetBrains Mono", Consolas, monospace; --serif: var(--sans); }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,7 +30,7 @@ button { font: inherit; color: inherit; }
 .who { margin-left: auto; display: flex; align-items: center; gap: 8px; }
 .bal { display: inline-flex; align-items: center; gap: 8px; font: 500 11.5px var(--mono); height: 32px; padding: 0 11px; border-radius: 6px; border: 1px solid var(--line); color: var(--sub); }
 .bal b { color: var(--ink); font-weight: 600; }
-.bal .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--molten); box-shadow: 0 0 10px rgba(242,164,140,.8); }
+.bal .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--tessera); box-shadow: 0 0 10px rgba(242,164,140,.8); }
 .mockbar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 29; text-align: center; font: 500 11px var(--mono); padding: 7px 16px; background: rgba(233,209,156,.08); color: var(--sand); border-top: 1px solid rgba(233,209,156,.16); backdrop-filter: blur(8px); }
 
 /* buttons: white primary, hairline ghost, mono labels */

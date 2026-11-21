@@ -1,4 +1,4 @@
-// Molten HTTP server: static site, JSON API for the studio, sandboxed previews, MCP + REST for agents.
+// Tessera HTTP server: static site, JSON API for the studio, sandboxed previews, MCP + REST for agents.
 //   node src/server.js        (reads .env; without ANTHROPIC_API_KEY it runs in MOCK mode)
 import { createServer } from "node:http";
 import { readFileSync, existsSync, statSync } from "node:fs";
@@ -22,7 +22,7 @@ const PREVIEW_CSP = "sandbox allow-scripts allow-pointer-lock; default-src 'none
 
 const send = (res, status, body, headers = {}) => { res.writeHead(status, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store", ...headers }); res.end(typeof body === "string" ? body : JSON.stringify(body)); };
 const cookies = (req) => Object.fromEntries((req.headers.cookie || "").split(";").map((c) => c.trim().split("=")).filter((p) => p[0]).map(([k, ...v]) => [k, decodeURIComponent(v.join("="))]));
-const setCookie = (token, maxAge) => `molten_s=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${CONFIG.secureCookies ? "; Secure" : ""}`;
+const setCookie = (token, maxAge) => `tessera_s=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${maxAge}${CONFIG.secureCookies ? "; Secure" : ""}`;
 async function readBody(req, limit = 64 * 1024) {
   let size = 0; const chunks = [];
   for await (const c of req) { size += c.length; if (size > limit) throw new UserError("request too large", 413); chunks.push(c); }
@@ -75,15 +75,15 @@ function servePreview(req, res, outId, url) {
 
 async function api(req, res, url) {
   const p = url.pathname, m = req.method;
-  const ck = cookies(req), me = svc.session(ck.molten_s);
+  const ck = cookies(req), me = svc.session(ck.tessera_s);
   const needAuth = () => { if (!me) throw new UserError("sign in with your wallet first", 401); return me; };
   // state-changing calls from the browser must carry this header (blocks cross-site form posts; there is no CORS)
-  if (m === "POST" && !p.startsWith("/api/agent/") && req.headers["x-molten"] !== "1") throw new UserError("missing x-molten header", 403);
+  if (m === "POST" && !p.startsWith("/api/agent/") && req.headers["x-tessera"] !== "1") throw new UserError("missing x-tessera header", 403);
 
   if (p === "/api/config" && m === "GET") return send(res, 200, { brand: CONFIG.brand, mock: CONFIG.mock, modes: svc.modes(), deposit: svc.depositInfo(), devFaucet: CONFIG.devFaucet, publicUrl: CONFIG.publicUrl, tools: TOOLS.map((t) => t.name) });
   if (p === "/api/auth/nonce" && m === "POST") { if (limited(req, "nonce", 30, 600_000)) throw new UserError("too many attempts, wait a few minutes", 429); const n = svc.nonce(); const b = await readBody(req); return send(res, 200, { nonce: n.nonce, message: svc.signInMessage(b.address || "", n.nonce) }); }
   if (p === "/api/auth/verify" && m === "POST") { if (limited(req, "verify", 30, 600_000)) throw new UserError("too many attempts", 429); const b = await readBody(req); const r = await svc.verify(b.address, b.nonce, b.signature); return send(res, 200, { address: r.address }, { "set-cookie": setCookie(r.token, 7 * 86400) }); }
-  if (p === "/api/auth/logout" && m === "POST") { svc.logout(ck.molten_s); return send(res, 200, { ok: true }, { "set-cookie": setCookie("", 0) }); }
+  if (p === "/api/auth/logout" && m === "POST") { svc.logout(ck.tessera_s); return send(res, 200, { ok: true }, { "set-cookie": setCookie("", 0) }); }
   if (p === "/api/price" && m === "GET") { try { return send(res, 200, { ethUsd: await ethUsd() }); } catch (e) { throw new UserError(e.message, 503); } }
   if (p === "/api/me" && m === "GET") return send(res, 200, me ? svc.me(me) : { address: null });
   if (p === "/api/activity" && m === "GET") return send(res, 200, svc.activity(needAuth()));
