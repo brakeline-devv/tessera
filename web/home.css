@@ -1,7 +1,7 @@
 /* Tessera landing, after the reference: near-black, a thin translucent top bar, grotesk headline, mono micro-labels, pastel light. */
 body.home-mode { background: #0b0b0e; }
 body.home-mode > .top { display: none; }            /* the landing has its own bar, like the reference */
-main.home { --gx: "Geist", "Inter Tight", system-ui, sans-serif; --gm: "Geist Mono", "JetBrains Mono", monospace; font-family: var(--gx); color: #f3f3f5; background: #0b0b0e; max-width: none; padding: 0; }
+main.home { --gx: "Fraunces", Georgia, serif; --gm: "IBM Plex Mono", Consolas, monospace; font-family: var(--gx); color: #f3f3f5; background: #0b0b0e; max-width: none; padding: 0; }
 .ln { display: block; overflow: hidden; padding-bottom: .08em; } .ln > span { display: inline-block; will-change: transform; }
 
 /* hero */
@@ -22,7 +22,7 @@ main.home { --gx: "Geist", "Inter Tight", system-ui, sans-serif; --gm: "Geist Mo
 .x-btn:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.5); }
 .x-copy { position: absolute; z-index: 2; left: 28px; bottom: 30px; pointer-events: none; }
 .x-copy a { pointer-events: auto; }
-.x-title { font-family: var(--gx); font-weight: 400; font-size: clamp(54px, 7.4vw, 126px); line-height: .96; letter-spacing: -.045em; }
+.x-title { font-family: var(--gx); font-weight: 400; font-size: clamp(54px, 7.4vw, 126px); line-height: .96; letter-spacing: -.03em; }
 .x-sub { display: flex; align-items: center; gap: 22px; margin-top: 22px; }
 .x-sub p { font: 400 11.5px/1.55 var(--gm); color: #b9b9c2; letter-spacing: .01em; }
 .x-cta { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: 5px; background: #f3f3f5; color: #0b0b0e; font: 600 10.5px var(--gm); letter-spacing: .08em; transition: transform .15s, background .2s; }
@@ -33,10 +33,10 @@ main.home { --gx: "Geist", "Inter Tight", system-ui, sans-serif; --gm: "Geist Mo
 .x-sec { width: min(1280px, calc(100% - 56px)); margin: 0 auto; padding: 150px 0 0; }
 .x-label { font: 500 11px var(--gm); letter-spacing: .1em; color: #77777f; }
 .x-head { display: flex; flex-direction: column; gap: 16px; }
-.x-h2 { font-family: var(--gx); font-weight: 400; font-size: clamp(40px, 5.2vw, 84px); line-height: .98; letter-spacing: -.04em; }
+.x-h2 { font-family: var(--gx); font-weight: 400; font-size: clamp(40px, 5.2vw, 84px); line-height: .98; letter-spacing: -.028em; }
 .x-lead { color: #a9a9b3; font-size: 17px; line-height: 1.6; max-width: 480px; margin-top: 18px; }
 .x-manifesto { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; gap: 26px; padding-top: 120px; }
-.mf { font-family: var(--gx); font-size: clamp(36px, 4.8vw, 78px); line-height: 1.04; letter-spacing: -.035em; max-width: 1150px; }
+.mf { font-family: var(--gx); font-size: clamp(36px, 4.8vw, 78px); line-height: 1.04; letter-spacing: -.025em; max-width: 1150px; }
 .mf .w { display: inline-block; opacity: .12; }
 
 .x-modes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 54px; }
@@ -74,7 +74,7 @@ main.home { --gx: "Geist", "Inter Tight", system-ui, sans-serif; --gm: "Geist Mo
 @keyframes blink { 50% { opacity: 0; } }
 
 .x-final { min-height: 80vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; width: min(1280px, calc(100% - 56px)); margin: 0 auto; padding-top: 140px; }
-.x-fin { font-family: var(--gx); font-weight: 400; font-size: clamp(56px, 9vw, 160px); line-height: .92; letter-spacing: -.05em; }
+.x-fin { font-family: var(--gx); font-weight: 400; font-size: clamp(56px, 9vw, 160px); line-height: .92; letter-spacing: -.025em; }
 .x-foot a:hover { color: #f3f3f5; }
 .x-foot { width: min(1280px, calc(100% - 56px)); margin: 80px auto 0; padding: 22px 0 40px; border-top: 1px solid rgba(255,255,255,.08); display: flex; justify-content: space-between; gap: 20px; font: 400 11px var(--gm); color: #66666e; flex-wrap: wrap; }
 
@@ -164,3 +164,6 @@ main.home { --gx: "Geist", "Inter Tight", system-ui, sans-serif; --gm: "Geist Mo
 .dm[data-stage="1"] .dm-idle span { opacity: 1; box-shadow: 0 0 40px rgba(242,164,140,.45); }
 .dm-idle p { font: 12px var(--gm); color: #66666e; }
 .dm:not([data-stage="0"]):not([data-stage="1"]) .dm-idle { opacity: 0; pointer-events: none; }
+
+/* Fraunces: soft, slightly wonky display cuts on the big lines */
+.x-title, .x-h2, .mf, .x-fin, .x-mode h3 { font-variation-settings: "SOFT" 100, "WONK" 1; }

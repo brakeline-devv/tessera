@@ -1,6 +1,6 @@
 // Tessera landing, modelled on the reference: a full-screen 3D hex field hero (three.js, hexfield.js) with a thin top bar,
 // a big grotesk headline bottom-left, a small mono line and a white button. Below: manifesto, modes, pay, agents, close.
-import { createHexField } from "./hexfield.js?v=13";
+import { createHexField } from "./hexfield.js?v=14";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const lines = (t) => t.split("|").map((l) => `<span class="ln"><span>${l}</span></span>`).join("");
@@ -41,7 +41,7 @@ export function home(S) {
   <section class="x-hero" id="xHero">
     <canvas class="x-field" id="xField"></canvas>
     <header class="x-bar">
-      <a class="x-brand" href="#/"><img src="mark.svg?v=13" alt=""><b>${B.toUpperCase()}.</b><span>STUDIO 001</span></a>
+      <a class="x-brand" href="#/"><img src="mark.svg?v=14" alt=""><b>${B.toUpperCase()}.</b><span>STUDIO 001</span></a>
       <nav class="x-right"><a href="#/docs" class="x-link">HOW IT WORKS ${NE}</a><a href="#/agents" class="x-link">FOR AGENTS ${NE}</a><a href="#/studio" class="x-btn">LAUNCH ${NE}</a></nav>
     </header>
     <div class="x-copy">
@@ -146,7 +146,7 @@ function runDemo() {
   const fmt = (n, d = 2) => Number(n).toFixed(d);
   let meta = null, mode = "website", p = 0, codeCache = {}, outFor = "", dead = false;
   const H = (s) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
-  fetch("showcase/meta.json?v=13").then((r) => r.json()).then((m) => { if (dead) return; meta = m; prep(); paint(); }).catch(() => {});
+  fetch("showcase/meta.json?v=14").then((r) => r.json()).then((m) => { if (dead) return; meta = m; prep(); paint(); }).catch(() => {});
 
   async function prep() {
     const get = (u) => fetch(u).then((r) => r.text()).catch(() => "");
