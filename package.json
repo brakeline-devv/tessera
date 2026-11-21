@@ -1,0 +1,22 @@
+{
+  "name": "molten",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Molten: prompt to website, logo, motion or X content, made by Claude, paid per use with ETH credits on Robinhood Chain. Agents use it over MCP.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test test/ledger.test.js",
+    "backup": "node scripts/backup.js",
+    "costs": "node scripts/costs.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.12.0",
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "viem": "^2.58.2",
+    "zod": "^4.6.7"
+  }
+}

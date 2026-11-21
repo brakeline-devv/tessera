@@ -1,0 +1,65 @@
+{
+ "motion": {
+  "mode": "motion",
+  "prompt": "Slow glowing embers rising over a deep warm dark background, for a coffee roaster hero. Soft orange sparks drift upward and lean toward the pointer.",
+  "model": "claude-opus-5-5",
+  "in": 323,
+  "out": 3909,
+  "cost": 0.079472,
+  "held": 41.777,
+  "charged": 10.332,
+  "title": "Embers"
+ },
+ "website": {
+  "mode": "website",
+  "prompt": "Landing page for Ember, a small-batch coffee roaster in Lisbon: single-origin beans roasted every Tuesday, a monthly subscription from 14 euros, and a tiny cafe on Rua da Rosa. Warm editorial look, dark roast tones with ember orange accents.",
+  "model": "claude-opus-5-5",
+  "in": 376,
+  "out": 22319,
+  "cost": 0.447884,
+  "held": 62.594,
+  "charged": 58.225,
+  "title": "Ember: Small-batch coffee roasted every Tuesday in Lisbon"
+ },
+ "logo": {
+  "mode": "logo",
+  "prompt": "Ember, a small-batch coffee roaster in Lisbon. Warm, confident, a little playful. Ember orange and deep roast brown.",
+  "model": "claude-sonnet-5-5",
+  "in": 292,
+  "out": 867,
+  "cost": 0.009254,
+  "held": 13.077,
+  "charged": 1.204,
+  "title": "Ember Bean Flame Symbol"
+ },
+ "xpost": {
+  "mode": "xpost",
+  "prompt": "Launch thread for Ember, a small-batch coffee roaster in Lisbon. Single-origin beans roasted every Tuesday, subscription from 14 euros a month, a tiny cafe on Rua da Rosa.",
+  "model": "claude-sonnet-5-5",
+  "in": 292,
+  "out": 783,
+  "cost": 0.008414,
+  "held": 7.875,
+  "charged": 1.094,
+  "title": "Ember is open. We're a small-batch coffee roaster in Lisbon,",
+  "data": {
+   "thread": [
+    "Ember is open. We're a small-batch coffee roaster in Lisbon, and we roast single-origin beans once a week, every Tuesday. Here's what that means and why we built it this way.",
+    "One origin per bag. No blends hiding the flavor of a single farm. You taste what the region, altitude and processing actually do to a coffee, and it changes from lot to lot.",
+    "We roast every Tuesday in small batches. Beans ship or get bagged within days, so what you open is weeks fresher than most supermarket coffee, which often sits for months.",
+    "Subscription starts at 14 euros a month. You choose how often the bag arrives, and you can pause or cancel whenever you want. Each bag comes with a card on the farm, the roast level and how we'd brew it.",
+    "The cafe is tiny, on Rua da Rosa in Lisbon. A handful of stools, a short menu, and the same beans we sell by the bag. Come by, taste the current roast, and ask us anything.",
+    "That's Ember. Small batches, one origin at a time, roasted every Tuesday. If you want the next roast, the subscription link is in our bio. If you're in Bairro Alto, the door is open."
+   ],
+   "posts": [
+    "This week's Tuesday roast is in the cooling tray. Single origin, one farm, one batch. Bagged and labeled by the afternoon.",
+    "Why single origin? Because a coffee from one farm tastes like somewhere specific. Blends are consistent. Single origins are interesting. We chose interesting.",
+    "Our subscription starts at 14 euros a month. No contract, no minimum. Pause it when you travel, restart when you're back.",
+    "The cafe on Rua da Rosa has very few seats and a short menu. That's deliberate. Fewer things, made with more attention.",
+    "Brewing tip: weigh your coffee. A cheap kitchen scale does more for your cup than a fancy grinder. Start with 15 grams of coffee to 250 grams of water and adjust from there.",
+    "We roast on Tuesdays so freshness is predictable. Coffee tastes best a few days to a few weeks after roasting, and we'd rather you drink it in that window."
+   ],
+   "bio": "Small-batch coffee roaster in Lisbon. Single-origin, roasted every Tuesday. Subscriptions from 14 euros a month. Cafe on Rua da Rosa."
+  }
+ }
+}
