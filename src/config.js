@@ -16,7 +16,7 @@ const num = (v, d) => (v === undefined || v === "" ? d : Number(v));
 
 export const CONFIG = {
   root: ROOT,
-  brand: E.KILN_BRAND || "Tessera",
+  brand: E.KILN_BRAND || "Tessera MCP",
   port: num(E.PORT, 6700),
   host: E.HOST || "127.0.0.1",
   publicUrl: E.PUBLIC_URL || "http://127.0.0.1:6700",
