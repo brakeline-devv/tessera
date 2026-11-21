@@ -1,11 +1,10 @@
 // Tessera landing, modelled on the reference: a full-screen 3D hex field hero (three.js, hexfield.js) with a thin top bar,
 // a big grotesk headline bottom-left, a small mono line and a white button. Below: manifesto, modes, pay, agents, close.
-import { createHexField } from "./hexfield.js?v=12";
+import { createHexField } from "./hexfield.js?v=13";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const lines = (t) => t.split("|").map((l) => `<span class="ln"><span>${l}</span></span>`).join("");
 const words = (t) => t.split(" ").map((w) => `<span class="w">${w}</span>`).join(" ");
-const SPARK = `<svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="spk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6a68f"/><stop offset=".55" stop-color="#c39bf0"/><stop offset="1" stop-color="#7d93f0"/></linearGradient></defs><path d="M12 1c.6 5.6 2.4 8.4 11 11-8.6 2.6-10.4 5.4-11 11-.6-5.6-2.4-8.4-11-11 8.6-2.6 10.4-5.4 11-11z" fill="url(#spk)"/></svg>`;
 const NE = `<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>`;
 const ICONS = {"Websites": "<svg viewBox=\"0 0 64 64\"><rect x=\"10\" y=\"15\" width=\"44\" height=\"34\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4.5\"/><path d=\"M10 25h44\" stroke=\"currentColor\" stroke-width=\"4.5\"/></svg>", "Logos": "<svg viewBox=\"0 0 64 64\"><path d=\"M32 8c1.2 11 4.8 16.4 22 24-17.2 7.6-20.8 13-22 24-1.2-11-4.8-16.4-22-24 17.2-7.6 20.8-13 22-24z\" fill=\"currentColor\"/></svg>", "Motion": "<svg viewBox=\"0 0 64 64\"><path d=\"M8 32c5-12 10-12 16 0s11 12 16 0 11-12 16 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4.5\" stroke-linecap=\"round\"/></svg>", "X posts": "<svg viewBox=\"0 0 64 64\"><g stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\"><path d=\"M40.0 32.0L54.0 32.0\"/><path d=\"M38.9 36.0L47.6 41.0\"/><path d=\"M36.0 38.9L41.0 47.6\"/><path d=\"M32.0 40.0L32.0 54.0\"/><path d=\"M28.0 38.9L23.0 47.6\"/><path d=\"M25.1 36.0L16.4 41.0\"/><path d=\"M24.0 32.0L10.0 32.0\"/><path d=\"M25.1 28.0L16.4 23.0\"/><path d=\"M28.0 25.1L23.0 16.4\"/><path d=\"M32.0 24.0L32.0 10.0\"/><path d=\"M36.0 25.1L41.0 16.4\"/><path d=\"M38.9 28.0L47.6 23.0\"/></g></svg>"};
 const MODES = [
@@ -42,14 +41,13 @@ export function home(S) {
   <section class="x-hero" id="xHero">
     <canvas class="x-field" id="xField"></canvas>
     <header class="x-bar">
-      <a class="x-brand" href="#/"><img src="mark.svg?v=12" alt=""><b>${B.toUpperCase()}.</b><span>STUDIO 001</span></a>
+      <a class="x-brand" href="#/"><img src="mark.svg?v=13" alt=""><b>${B.toUpperCase()}.</b><span>STUDIO 001</span></a>
       <nav class="x-right"><a href="#/docs" class="x-link">HOW IT WORKS ${NE}</a><a href="#/agents" class="x-link">FOR AGENTS ${NE}</a><a href="#/studio" class="x-btn">LAUNCH ${NE}</a></nav>
     </header>
     <div class="x-copy">
       <h1 class="x-title">${lines("Make anything,|in one prompt.")}</h1>
       <div class="x-sub"><p>Websites, logos, motion and posts by Claude.<br>Paid per use, on Robinhood Chain.</p><a class="x-cta" href="#/studio">OPEN STUDIO</a></div>
     </div>
-    <a class="x-badge" href="#/docs">${SPARK}<span>Made with Claude</span></a>
   </section>
 
   <section class="x-sec x-manifesto"><span class="x-label">// 01 · WHAT IT IS</span><p class="mf">${words("You write one sentence. Claude does the craft. You pay for the tokens it used, and every credit it didn't use flows straight back.")}</p></section>
@@ -113,7 +111,7 @@ export function home(S) {
 
   ctx = G.context(() => {
     G.from(".x-title .ln > span", { yPercent: 110, duration: 1.1, ease: "expo.out", stagger: 0.1, delay: 0.25 });
-    G.from(".x-sub, .x-bar, .x-badge", { opacity: 0, y: 14, duration: 0.9, ease: "power3.out", stagger: 0.08, delay: 0.5 });
+    G.from(".x-sub, .x-bar", { opacity: 0, y: 14, duration: 0.9, ease: "power3.out", stagger: 0.08, delay: 0.5 });
     G.from(".x-field", { opacity: 0, duration: 1.6, ease: "power2.out" });
     ST.create({ trigger: "#xHero", start: "top top", end: "bottom top", scrub: true, onUpdate: (s) => field && field.setScroll(s.progress) });
     G.to(".x-copy", { yPercent: -40, opacity: 0, ease: "none", scrollTrigger: { trigger: "#xHero", start: "35% top", end: "bottom top", scrub: true } });
@@ -148,7 +146,7 @@ function runDemo() {
   const fmt = (n, d = 2) => Number(n).toFixed(d);
   let meta = null, mode = "website", p = 0, codeCache = {}, outFor = "", dead = false;
   const H = (s) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
-  fetch("showcase/meta.json?v=12").then((r) => r.json()).then((m) => { if (dead) return; meta = m; prep(); paint(); }).catch(() => {});
+  fetch("showcase/meta.json?v=13").then((r) => r.json()).then((m) => { if (dead) return; meta = m; prep(); paint(); }).catch(() => {});
 
   async function prep() {
     const get = (u) => fetch(u).then((r) => r.text()).catch(() => "");

@@ -57,7 +57,7 @@ async function ensureChain() {
 }
 
 /* ---------------- router ---------------- */
-import { home as homeView, homeCleanup } from "./home.js?v=12";
+import { home as homeView, homeCleanup } from "./home.js?v=13";
 const home = () => homeView(S);
 const VIEWS = { home, studio, gallery, account, agents, docs, terms, privacy };
 function route() {
