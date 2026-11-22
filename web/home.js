@@ -1,6 +1,6 @@
 // Tessera landing, modelled on the reference: a full-screen 3D hex field hero (three.js, hexfield.js) with a thin top bar,
 // a big grotesk headline bottom-left, a small mono line and a white button. Below: manifesto, modes, pay, agents, close.
-import { createHexField } from "./hexfield.js?v=17";
+import { createHexField } from "./hexfield.js?v=18";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const lines = (t) => t.split("|").map((l) => `<span class="ln"><span>${l}</span></span>`).join("");
@@ -41,8 +41,8 @@ export function home(S) {
   <section class="x-hero" id="xHero">
     <canvas class="x-field" id="xField"></canvas>
     <header class="x-bar">
-      <a class="x-brand" href="#/"><img src="mark.svg?v=17" alt=""><b>${B.toUpperCase()}.</b><span>STUDIO 001</span></a>
-      <nav class="x-right"><a href="#/docs" class="x-link">HOW IT WORKS ${NE}</a><a href="#/agents" class="x-link">FOR AGENTS ${NE}</a><a href="#/studio" class="x-btn">LAUNCH ${NE}</a></nav>
+      <a class="x-brand" href="#/"><img src="mark.svg?v=18" alt=""><b>${B.toUpperCase()}.</b><span>STUDIO 001</span></a>
+      <nav class="x-right"><a href="#/docs" class="x-link">HOW IT WORKS ${NE}</a><a href="#/agents" class="x-link">FOR AGENTS ${NE}</a><a href="https://x.com/tesseraai_trade" target="_blank" rel="noopener" class="x-link">X ${NE}</a><a href="#/studio" class="x-btn">LAUNCH ${NE}</a></nav>
     </header>
     <div class="x-copy">
       <h1 class="x-title">${lines("Make anything,|in one prompt.")}</h1>
@@ -95,7 +95,7 @@ export function home(S) {
     <div class="term"><div class="tb"><i></i><i></i><i></i><span>claude code</span></div><pre id="typed"></pre></div></section>
 
   <section class="x-final"><h2 class="x-fin">${lines("Bring the idea.|We'll finish it.")}</h2><a class="x-cta big" href="#/studio">OPEN STUDIO</a></section>
-  <footer class="x-foot"><span>${B} · made by Claude, paid on Robinhood Chain</span><span><a href="#/docs">How it works</a> · <a href="#/terms">Terms</a> · <a href="#/privacy">Privacy</a> · <a href="https://github.com/brakeline-devv/tessera" target="_blank" rel="noopener">GitHub</a> · Credits are not withdrawable.</span></footer>`;
+  <footer class="x-foot"><span>${B} · made by Claude, paid on Robinhood Chain</span><span><a href="#/docs">How it works</a> · <a href="#/terms">Terms</a> · <a href="#/privacy">Privacy</a> · <a href="https://x.com/tesseraai_trade" target="_blank" rel="noopener">X</a> · <a href="https://github.com/brakeline-devv/tessera" target="_blank" rel="noopener">GitHub</a> · Credits are not withdrawable.</span></footer>`;
 
   demo = runDemo();
   try { field = createHexField(document.getElementById("xField"), { eventTarget: document.getElementById("xHero") }); }
@@ -146,7 +146,7 @@ function runDemo() {
   const fmt = (n, d = 2) => Number(n).toFixed(d);
   let meta = null, mode = "website", p = 0, codeCache = {}, outFor = "", dead = false;
   const H = (s) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
-  fetch("showcase/meta.json?v=17").then((r) => r.json()).then((m) => { if (dead) return; meta = m; prep(); paint(); }).catch(() => {});
+  fetch("showcase/meta.json?v=18").then((r) => r.json()).then((m) => { if (dead) return; meta = m; prep(); paint(); }).catch(() => {});
 
   async function prep() {
     const get = (u) => fetch(u).then((r) => r.text()).catch(() => "");
