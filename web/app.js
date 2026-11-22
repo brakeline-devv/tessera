@@ -11,6 +11,10 @@ async function api(path, body, method) {
   if (!r.ok) { const e = new Error(j.error || r.statusText); e.status = r.status; e.code = j.code; throw e; }
   return j;
 }
+document.addEventListener("click", (e) => { // any [data-copy] element copies its value (the $TESS contract address)
+  const b = e.target.closest("[data-copy]"); if (!b) return;
+  e.preventDefault(); navigator.clipboard.writeText(b.dataset.copy).then(() => toast("Contract address copied"), () => toast(b.dataset.copy));
+});
 function toast(msg, bad) { const t = $("#toast"); t.textContent = msg; t.className = "toast on" + (bad ? " bad" : ""); clearTimeout(t._h); t._h = setTimeout(() => (t.className = "toast"), 4200); }
 
 const ICON = {
@@ -57,7 +61,7 @@ async function ensureChain() {
 }
 
 /* ---------------- router ---------------- */
-import { home as homeView, homeCleanup } from "./home.js?v=18";
+import { home as homeView, homeCleanup } from "./home.js?v=19";
 const home = () => homeView(S);
 const VIEWS = { home, studio, gallery, account, agents, docs, terms, privacy };
 function route() {

@@ -187,3 +187,4 @@ pre.code { background: #0e0e12; border: 1px solid var(--line); border-radius: 10
 }
 @media (prefers-reduced-motion: reduce) { .crucible i { animation: none; } }
 [hidden] { display: none !important; }
+.foot-ca { background: none; border: 0; padding: 0; font: inherit; color: var(--sub); cursor: pointer; text-decoration: underline; text-decoration-color: rgba(255,255,255,.2); text-underline-offset: 3px; } .foot-ca:hover { color: var(--ink); }

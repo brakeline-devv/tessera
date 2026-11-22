@@ -21,7 +21,7 @@ main.home { --gx: "Fraunces", Georgia, serif; --gm: "IBM Plex Mono", Consolas, m
 .x-btn { height: 30px; padding: 0 11px; border: 1px solid rgba(255,255,255,.28); border-radius: 6px; transition: background .2s, border-color .2s; }
 .x-btn:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.5); }
 .x-copy { position: absolute; z-index: 2; left: 28px; bottom: 30px; pointer-events: none; }
-.x-copy a { pointer-events: auto; }
+.x-copy a, .x-copy button { pointer-events: auto; }
 .x-title { font-family: var(--gx); font-weight: 400; font-size: clamp(54px, 7.4vw, 126px); line-height: .96; letter-spacing: -.03em; }
 .x-sub { display: flex; align-items: center; gap: 22px; margin-top: 22px; }
 .x-sub p { font: 400 11.5px/1.55 var(--gm); color: #b9b9c2; letter-spacing: .01em; }
@@ -167,3 +167,12 @@ main.home { --gx: "Fraunces", Georgia, serif; --gm: "IBM Plex Mono", Consolas, m
 
 /* Fraunces: soft, slightly wonky display cuts on the big lines */
 .x-title, .x-h2, .mf, .x-fin, .x-mode h3 { font-variation-settings: "SOFT" 100, "WONK" 1; }
+
+/* $TESS contract address chip (click to copy) */
+.x-ca { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; height: 30px; padding: 0 6px 0 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,.14); background: rgba(14,14,18,.6); backdrop-filter: blur(8px); color: #d9d9e0; font: 500 11px var(--gm); cursor: pointer; transition: border-color .15s; }
+.x-ca:hover { border-color: rgba(195,155,240,.6); }
+.x-ca b { font-weight: 600; background: linear-gradient(100deg,#f2a48c,#c39bf0 55%,#8199f2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.x-ca code { font: inherit; letter-spacing: .01em; } .x-ca .s { display: none; }
+.x-ca em { font-style: normal; font-weight: 600; font-size: 9.5px; letter-spacing: .08em; padding: 4px 7px; border-radius: 4px; background: #f3f3f5; color: #0b0b0e; }
+.x-ca.mini { margin: 0 0 0 4px; height: 24px; vertical-align: middle; background: transparent; backdrop-filter: none; } .x-ca.mini .f { display: none; } .x-ca.mini .s { display: inline; }
+@media (max-width: 720px) { .x-ca .f { display: none; } .x-ca .s { display: inline; } }

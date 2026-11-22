@@ -1,10 +1,12 @@
 // Tessera landing, modelled on the reference: a full-screen 3D hex field hero (three.js, hexfield.js) with a thin top bar,
 // a big grotesk headline bottom-left, a small mono line and a white button. Below: manifesto, modes, pay, agents, close.
-import { createHexField } from "./hexfield.js?v=18";
+import { createHexField } from "./hexfield.js?v=19";
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const lines = (t) => t.split("|").map((l) => `<span class="ln"><span>${l}</span></span>`).join("");
 const words = (t) => t.split(" ").map((w) => `<span class="w">${w}</span>`).join(" ");
+const TOKEN_CA = "0x0ffc6c98dc760bf30c2ae808a611a05652d43dd9";
+const CA_CHIP = (cls = "") => `<button class="x-ca ${cls}" data-copy="${TOKEN_CA}" title="Copy contract address"><b>$TESS</b><code><span class="f">${TOKEN_CA}</span><span class="s">0x0ffc…3dd9</span></code><em>COPY</em></button>`;
 const NE = `<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>`;
 const ICONS = {"Websites": "<svg viewBox=\"0 0 64 64\"><rect x=\"10\" y=\"15\" width=\"44\" height=\"34\" rx=\"6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4.5\"/><path d=\"M10 25h44\" stroke=\"currentColor\" stroke-width=\"4.5\"/></svg>", "Logos": "<svg viewBox=\"0 0 64 64\"><path d=\"M32 8c1.2 11 4.8 16.4 22 24-17.2 7.6-20.8 13-22 24-1.2-11-4.8-16.4-22-24 17.2-7.6 20.8-13 22-24z\" fill=\"currentColor\"/></svg>", "Motion": "<svg viewBox=\"0 0 64 64\"><path d=\"M8 32c5-12 10-12 16 0s11 12 16 0 11-12 16 0\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"4.5\" stroke-linecap=\"round\"/></svg>", "X posts": "<svg viewBox=\"0 0 64 64\"><g stroke=\"currentColor\" stroke-width=\"4\" stroke-linecap=\"round\"><path d=\"M40.0 32.0L54.0 32.0\"/><path d=\"M38.9 36.0L47.6 41.0\"/><path d=\"M36.0 38.9L41.0 47.6\"/><path d=\"M32.0 40.0L32.0 54.0\"/><path d=\"M28.0 38.9L23.0 47.6\"/><path d=\"M25.1 36.0L16.4 41.0\"/><path d=\"M24.0 32.0L10.0 32.0\"/><path d=\"M25.1 28.0L16.4 23.0\"/><path d=\"M28.0 25.1L23.0 16.4\"/><path d=\"M32.0 24.0L32.0 10.0\"/><path d=\"M36.0 25.1L41.0 16.4\"/><path d=\"M38.9 28.0L47.6 23.0\"/></g></svg>"};
 const MODES = [
@@ -41,12 +43,13 @@ export function home(S) {
   <section class="x-hero" id="xHero">
     <canvas class="x-field" id="xField"></canvas>
     <header class="x-bar">
-      <a class="x-brand" href="#/"><img src="mark.svg?v=18" alt=""><b>${B.toUpperCase()}.</b><span>STUDIO 001</span></a>
+      <a class="x-brand" href="#/"><img src="mark.svg?v=19" alt=""><b>${B.toUpperCase()}.</b><span>STUDIO 001</span></a>
       <nav class="x-right"><a href="#/docs" class="x-link">HOW IT WORKS ${NE}</a><a href="#/agents" class="x-link">FOR AGENTS ${NE}</a><a href="https://x.com/tesseraai_trade" target="_blank" rel="noopener" class="x-link">X ${NE}</a><a href="#/studio" class="x-btn">LAUNCH ${NE}</a></nav>
     </header>
     <div class="x-copy">
       <h1 class="x-title">${lines("Make anything,|in one prompt.")}</h1>
       <div class="x-sub"><p>Websites, logos, motion and posts by Claude.<br>Paid per use, on Robinhood Chain.</p><a class="x-cta" href="#/studio">OPEN STUDIO</a></div>
+      ${CA_CHIP()}
     </div>
   </section>
 
@@ -95,7 +98,7 @@ export function home(S) {
     <div class="term"><div class="tb"><i></i><i></i><i></i><span>claude code</span></div><pre id="typed"></pre></div></section>
 
   <section class="x-final"><h2 class="x-fin">${lines("Bring the idea.|We'll finish it.")}</h2><a class="x-cta big" href="#/studio">OPEN STUDIO</a></section>
-  <footer class="x-foot"><span>${B} · made by Claude, paid on Robinhood Chain</span><span><a href="#/docs">How it works</a> · <a href="#/terms">Terms</a> · <a href="#/privacy">Privacy</a> · <a href="https://x.com/tesseraai_trade" target="_blank" rel="noopener">X</a> · <a href="https://github.com/brakeline-devv/tessera" target="_blank" rel="noopener">GitHub</a> · Credits are not withdrawable.</span></footer>`;
+  <footer class="x-foot"><span>${B} · made by Claude, paid on Robinhood Chain · ${CA_CHIP("mini")}</span><span><a href="#/docs">How it works</a> · <a href="#/terms">Terms</a> · <a href="#/privacy">Privacy</a> · <a href="https://x.com/tesseraai_trade" target="_blank" rel="noopener">X</a> · <a href="https://github.com/brakeline-devv/tessera" target="_blank" rel="noopener">GitHub</a> · Credits are not withdrawable.</span></footer>`;
 
   demo = runDemo();
   try { field = createHexField(document.getElementById("xField"), { eventTarget: document.getElementById("xHero") }); }
@@ -146,7 +149,7 @@ function runDemo() {
   const fmt = (n, d = 2) => Number(n).toFixed(d);
   let meta = null, mode = "website", p = 0, codeCache = {}, outFor = "", dead = false;
   const H = (s) => s.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
-  fetch("showcase/meta.json?v=18").then((r) => r.json()).then((m) => { if (dead) return; meta = m; prep(); paint(); }).catch(() => {});
+  fetch("showcase/meta.json?v=19").then((r) => r.json()).then((m) => { if (dead) return; meta = m; prep(); paint(); }).catch(() => {});
 
   async function prep() {
     const get = (u) => fetch(u).then((r) => r.text()).catch(() => "");
