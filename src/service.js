@@ -46,6 +46,8 @@ export function makeService(db, ledger) {
       return { nonce, message: (address) => svc.signInMessage(address, nonce) };
     },
     signInMessage(address, nonce) {
+      // always the checksummed form, so the message the wallet signs and the one we verify are identical
+      try { address = getAddress(address); } catch {}
       return `${CONFIG.brand} wants you to sign in with your wallet.\n\nAddress: ${address}\nChain: Robinhood Chain (${CONFIG.chainId})\nNonce: ${nonce}\n\nThis only proves you own the wallet. It costs nothing and sends no transaction.`;
     },
     async verify(address, nonce, signature) {
